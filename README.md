@@ -5,7 +5,7 @@ base-dev-env--grunt
 local development environment.
 
 ## Detail
-* Task Runner.
+* Task Runner
 	* grunt
 * HTML Template Engine
 	* assemble

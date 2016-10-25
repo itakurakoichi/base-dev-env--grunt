@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+.l-common_module1 {
+	margin: 10px 10px 0;
+}
+
+.common_module1 {
+	border: 1px solid #000;
+	.common_module1-header {
+		border: 1px solid #000;
+	}
+	.common_module1-body {
+		border: 1px solid #000;
+	}
+}
