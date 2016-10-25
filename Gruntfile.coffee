@@ -8,6 +8,8 @@ module.exports = (grunt) ->
 			src: 'src'
 			dest: 'dest'
 			hbs: '<%= path.src %>/hbs'
+			scss: '<%= path.src %>/scss'
+			css: '<%= path.dest %>/css'
 		# connect local server
 		connect:
 			server:
@@ -24,6 +26,21 @@ module.exports = (grunt) ->
 					src: '**/*.hbs'
 					dest: '<%= path.dest %>/demo/'
 				]
+		# css framework, compass
+		compass:
+			options:
+				noLineComments: true
+				debugInfo: false
+				outputStyle: 'compressed'
+				force: true
+			top:
+				options:
+					sassDir: '<%= path.scss %>/top/'
+					cssDir: '<%= path.css %>/top/'
+			# hoge_page:
+			# 	options:
+			# 		sassDir: '<%= path.scss %>/hoge_page/'
+			# 		cssDir: '<%= path.css %>/hoge_page/'
 		# watch files, and excuse tasks
 		watch:
 			options:
@@ -44,8 +61,8 @@ module.exports = (grunt) ->
 	grunt.registerTask 'watch_confirm', ->
 		grunt.log.writeln('watched task...');
 
-	# assembleの動作検証
-	grunt.registerTask 'default', [ 'assemble' ]
+	grunt.registerTask 'task_assemble', [ 'assemble' ]
+	grunt.registerTask 'task_compass', [ 'compass' ]
 
 	grunt.registerTask 'dev', [
 		'hello'
