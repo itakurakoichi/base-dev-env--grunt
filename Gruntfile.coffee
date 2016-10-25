@@ -14,7 +14,7 @@ module.exports = (grunt) ->
 				options:
 					hostname: 'localhost'
 					port: 7777
-					base: 'dist/'
+					base: 'dest/'
 		# assemble setting
 		assemble:
 			task1:
@@ -30,7 +30,7 @@ module.exports = (grunt) ->
 				livereload: true
 				spawn: false
 			assemble:
-				files: 'src/hbs/*.hbs'
+				files: '<%= path.hbs %>/*.hbs'
 				tasks: [
 					'watch_confirm'
 					'newer:assemble'
