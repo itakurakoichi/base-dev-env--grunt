@@ -49,17 +49,18 @@ module.exports = (grunt) ->
 			assemble:
 				files: '<%= path.hbs %>/*.hbs'
 				tasks: [
-					'watch_confirm'
 					'newer:assemble'
+				]
+			compass:
+				files: '<%= path.scss %>/**/*.scss'
+				tasks: [
+					'compass'
 				]
 
 	##
 	# 各タスク
 	grunt.registerTask 'hello', ->
 		grunt.log.writeln('hello task excuse...');
-
-	grunt.registerTask 'watch_confirm', ->
-		grunt.log.writeln('watched task...');
 
 	grunt.registerTask 'task_assemble', [ 'assemble' ]
 	grunt.registerTask 'task_compass', [ 'compass' ]
