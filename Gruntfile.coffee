@@ -1,5 +1,7 @@
 module.exports = (grunt) ->
+	# Check time
 	require('time-grunt') grunt
+	# Install plugin
 	require('jit-grunt') grunt
 
 	grunt.initConfig
@@ -9,7 +11,8 @@ module.exports = (grunt) ->
 			dest: 'dest'
 			hbs: '<%= path.src %>/hbs'
 			scss: '<%= path.src %>/scss'
-			css: '<%= path.dest %>/css'
+			css: '<%= path.dest %>/css',
+			html: '<%= path.dest %>/demo'
 		# connect local server
 		connect:
 			server:
@@ -19,12 +22,33 @@ module.exports = (grunt) ->
 					base: 'dest/'
 		# assemble setting
 		assemble:
-			task1:
+			# all:
+			# 	files: [
+			# 		expand: true
+			# 		cwd: '<%= path.hbs %>/'
+			# 		src: '**/*.hbs'
+			# 		dest: '<%= path.dest %>/demo/'
+			# 	]
+			top:
 				files: [
 					expand: true
 					cwd: '<%= path.hbs %>/'
-					src: '**/*.hbs'
+					src: '*.hbs'
 					dest: '<%= path.dest %>/demo/'
+				]
+			info:
+				files: [
+					expand: true
+					cwd: '<%= path.hbs %>/info/'
+					src: '**/*.hbs'
+					dest: '<%= path.dest %>/demo/info/'
+				]
+			about:
+				files: [
+					expand: true
+					cwd: '<%= path.hbs %>/about/'
+					src: '**/*.hbs'
+					dest: '<%= path.dest %>/demo/about/'
 				]
 		# css framework, compass
 		compass:
@@ -33,22 +57,40 @@ module.exports = (grunt) ->
 				debugInfo: false
 				outputStyle: 'compressed'
 				force: true
-			top:
+			page_top:
 				options:
-					sassDir: '<%= path.scss %>/top/'
-					cssDir: '<%= path.css %>/top/'
-			# hoge_page:
-			# 	options:
-			# 		sassDir: '<%= path.scss %>/hoge_page/'
-			# 		cssDir: '<%= path.css %>/hoge_page/'
+					sassDir: '<%= path.scss %>/'
+					cssDir: '<%= path.css %>/'
+			page_info:
+				options:
+					sassDir: '<%= path.scss %>/info/'
+					cssDir: '<%= path.css %>/info/'
+			page_about:
+				options:
+					sassDir: '<%= path.scss %>/about/'
+					cssDir: '<%= path.css %>/about/'
+		# Check html
+		htmlhint:
+			dev:
+				src: [
+					'<%= path.html %>/**/*.html'
+				]
+		# Check css
+		csslint:
+			dev:
+				src: [
+					'<%= path.css %>/**/*.css'
+				]
 		# watch files, and excuse tasks
 		watch:
 			options:
 				livereload: true
 				spawn: false
 			assemble:
-				files: '<%= path.hbs %>/*.hbs'
+				# TODO: 全hbsをwatchしており、1ファイル変更でも、全パブリッシュが発生する、が良いか
+				files: '<%= path.hbs %>/**/*.hbs'
 				tasks: [
+					# MEMO: newer効いているか
 					'newer:assemble'
 				]
 			compass:
@@ -56,17 +98,45 @@ module.exports = (grunt) ->
 				tasks: [
 					'compass'
 				]
+			csslint:
+				files: [
+					'<%= path.scss %>/**/*.scss'
+				]
+				tasks: [
+					'csslint:dev'
+				]
+			htmlhint:
+				files: [
+					'<%= path.hbs %>/**/*.hbs'
+				]
+				tasks: [
+					'htmlhint:dev'
+				]
 
 	##
 	# 各タスク
 	grunt.registerTask 'hello', ->
-		grunt.log.writeln('hello task excuse...');
+		grunt.log.writeln('■■■ hello task excuse ■■■');
 
-	grunt.registerTask 'task_assemble', [ 'assemble' ]
-	grunt.registerTask 'task_compass', [ 'compass' ]
+	grunt.registerTask 'task_assemble', ['assemble']
+	grunt.registerTask 'task_compass', ['compass']
 
+	grunt.registerTask 'css', [
+		'hello'
+		'csslint:dev'
+	]
+
+	grunt.registerTask 'html', [
+		'hello'
+		'htmlhint:dev'
+	]
+
+	# dev
 	grunt.registerTask 'dev', [
 		'hello'
 		'connect'
 		'watch'
 	]
+
+	# prod
+	# hogehoge
