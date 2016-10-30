@@ -81,6 +81,16 @@ module.exports = (grunt) ->
 				src: [
 					'<%= path.css %>/**/*.css'
 				]
+		# Notice task process
+		notify:
+			assemble:
+				options:
+					title: 'Task Complete'
+					message: 'assemble task finished'
+			scss:
+				options:
+					title: 'Task Complete'
+					message: 'scss task finished'
 		# watch files, and excuse tasks
 		watch:
 			options:
@@ -92,11 +102,13 @@ module.exports = (grunt) ->
 				tasks: [
 					# MEMO: newer効いているか
 					'newer:assemble'
+					'notify:assemble'
 				]
 			compass:
 				files: '<%= path.scss %>/**/*.scss'
 				tasks: [
 					'compass'
+					'notify:scss'
 				]
 			csslint:
 				files: [
@@ -122,12 +134,10 @@ module.exports = (grunt) ->
 	grunt.registerTask 'task_compass', ['compass']
 
 	grunt.registerTask 'css', [
-		'hello'
 		'csslint:dev'
 	]
 
 	grunt.registerTask 'html', [
-		'hello'
 		'htmlhint:dev'
 	]
 
