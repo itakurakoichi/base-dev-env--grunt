@@ -5,6 +5,7 @@ module.exports = (grunt) ->
 	require('jit-grunt') grunt
 
 	grunt.initConfig
+		#-------------------------------------------------------------------------
 		# Path Setting
 		path:
 			src: 'src'
@@ -13,6 +14,8 @@ module.exports = (grunt) ->
 			scss: '<%= path.src %>/scss'
 			css: '<%= path.dest %>/css',
 			html: '<%= path.dest %>/demo'
+
+		#-------------------------------------------------------------------------
 		# connect local server
 		connect:
 			server:
@@ -20,67 +23,93 @@ module.exports = (grunt) ->
 					hostname: 'localhost'
 					port: 7777
 					base: 'dest/'
-		# assemble setting
+
+		#-------------------------------------------------------------------------
+		# assemble
 		assemble:
-			# all:
-			# 	files: [
-			# 		expand: true
-			# 		cwd: '<%= path.hbs %>/'
-			# 		src: '**/*.hbs'
-			# 		dest: '<%= path.dest %>/demo/'
-			# 	]
+			options:
+				partials: [
+					'<%= path.hbs%>/common/*.hbs'
+				]
 			top:
+				# options:
+				# 	partials: [
+				# 		'<%= path.hbs%>/common/*.hbs '
+				# 	]
 				files: [
 					expand: true
 					cwd: '<%= path.hbs %>/'
 					src: '*.hbs'
 					dest: '<%= path.dest %>/demo/'
 				]
-			info:
-				files: [
-					expand: true
-					cwd: '<%= path.hbs %>/info/'
-					src: '**/*.hbs'
-					dest: '<%= path.dest %>/demo/info/'
-				]
-			about:
-				files: [
-					expand: true
-					cwd: '<%= path.hbs %>/about/'
-					src: '**/*.hbs'
-					dest: '<%= path.dest %>/demo/about/'
-				]
-		# css framework, compass
+			# info:
+			# 	files: [
+			# 		expand: true
+			# 		cwd: '<%= path.hbs %>/info/'
+			# 		src: '**/*.hbs'
+			# 		dest: '<%= path.dest %>/demo/info/'
+			# 	]
+			# about:
+			# 	files: [
+			# 		expand: true
+			# 		cwd: '<%= path.hbs %>/about/'
+			# 		src: '**/*.hbs'
+			# 		dest: '<%= path.dest %>/demo/about/'
+			# 	]
+
+		#-------------------------------------------------------------------------
+		# css
 		compass:
 			options:
 				noLineComments: true
 				debugInfo: false
-				outputStyle: 'compressed'
+				# outputStyle: 'compressed'
 				force: true
 			page_top:
 				options:
 					sassDir: '<%= path.scss %>/'
 					cssDir: '<%= path.css %>/'
-			page_info:
-				options:
-					sassDir: '<%= path.scss %>/info/'
-					cssDir: '<%= path.css %>/info/'
-			page_about:
-				options:
-					sassDir: '<%= path.scss %>/about/'
-					cssDir: '<%= path.css %>/about/'
-		# Check html
+			# page_info:
+			# 	options:
+			# 		sassDir: '<%= path.scss %>/info/'
+			# 		cssDir: '<%= path.css %>/info/'
+			# page_about:
+			# 	options:
+			# 		sassDir: '<%= path.scss %>/about/'
+			# 		cssDir: '<%= path.css %>/about/'
+
+		#-------------------------------------------------------------------------
+		# Imagemin
+		# TODO: ファイルに変更があっても無くても常に実行されるので、newerするか？
+		# TODO: mozjpegの追加
+		imagemin:
+			# options:
+			# 	use: []
+			test: 
+				files: [
+					expand: true     # これが無いとエラーになる, また、吐き出し側にも同名ファイルがある場合、これが無いとtaskが実行されない、という説も有り
+					cwd: '<%= path.src %>/img/common/'
+					src: '*.{png,jpg,svg,gif}'
+					dest: '<%= path.dest %>/img/common/'
+				]
+
+		#-------------------------------------------------------------------------
+		# Check
 		htmlhint:
+			options:
+				htmlhintrc: '.htmlhintrc'
+				force: true
 			dev:
 				src: [
 					'<%= path.html %>/**/*.html'
 				]
-		# Check css
 		csslint:
 			dev:
 				src: [
 					'<%= path.css %>/**/*.css'
 				]
+
+		#-------------------------------------------------------------------------
 		# Notice task process
 		notify:
 			assemble:
@@ -125,11 +154,8 @@ module.exports = (grunt) ->
 					'htmlhint:dev'
 				]
 
-	##
+	#-------------------------------------------------------------------------
 	# 各タスク
-	grunt.registerTask 'hello', ->
-		grunt.log.writeln('■■■ hello task excuse ■■■');
-
 	grunt.registerTask 'task_assemble', ['assemble']
 	grunt.registerTask 'task_compass', ['compass']
 
@@ -143,7 +169,6 @@ module.exports = (grunt) ->
 
 	# dev
 	grunt.registerTask 'dev', [
-		'hello'
 		'connect'
 		'watch'
 	]
