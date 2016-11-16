@@ -1,0 +1,146 @@
+@charset "UTF-8";
+h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd, figure {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+li {
+  padding: 0;
+}
+
+img {
+  border: 0;
+  vertical-align: top;
+}
+
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+  line-height: 1;
+  overflow-x: hidden;
+}
+
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+  display: block;
+}
+
+body, input, select, textarea {
+  font-family: Helvetica, Arial, Meiryo, 'ヒラギノ角ゴシック', 'Hiragino Sans', 'Hiragino Kaku Gothic Pro', sans-serif;
+}
+
+button, input, select, textarea {
+  margin: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+textarea {
+  vertical-align: top;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  color: #3db680;
+  text-decoration: none;
+}
+a:visited {
+  color: #3db680;
+}
+a img:hover {
+  opacity: .8;
+  backface-visibility: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  background: #0af;
+}
+
+.l-logoarea {
+  margin-left: 20px;
+}
+
+.logoarea .logoarea-title {
+  color: #fff;
+  letter-spacing: .2rem;
+  font-size: 16px;
+}
+
+.l-globalnav {
+  margin-right: 20px;
+}
+
+.globalnav {
+  color: #fff;
+}
+
+.l-footer {
+  margin-top: 100px;
+}
+
+.footer {
+  height: 200px;
+  padding: 20px;
+  background: #0af;
+  box-sizing: border-box;
+}
+.footer .footer-title {
+  color: #fff;
+  font-size: 14px;
+}
+
+.l-main {
+  margin-top: 50px;
+}
+
+.main {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.section-header h1 {
+  font-size: 40px;
+}
+.section-body {
+  margin-top: 30px;
+}
+.section-text {
+  margin-top: 30px;
+  line-height: 2;
+}
+.section-text:first-child {
+  margin-top: 0;
+}
+.section--h2 {
+  margin-top: 80px;
+}
+.section--h2 .section-header h2 {
+  font-size: 30px;
+}
+.section--h3 {
+  margin-top: 50px;
+}
+.section--h3 .section-header h3 {
+  font-size: 25px;
+}
+.section--h3 .section-body {
+  margin-top: 10px;
+}
