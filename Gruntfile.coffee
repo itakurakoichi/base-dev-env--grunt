@@ -4,6 +4,8 @@ module.exports = (grunt) ->
 	# Install plugin
 	require('jit-grunt') grunt
 
+	mozjpeg = require('imagemin-mozjpeg');
+
 	grunt.initConfig
 		#-------------------------------------------------------------------------
 		# Path Setting
@@ -84,8 +86,12 @@ module.exports = (grunt) ->
 		# TODO: mozjpegの追加
 		imagemin:
 			# options:
-			# 	use: []
-			test: 
+			# 	force: true
+			# 	# flatten: true
+			# 	use: [
+			# 		mozjpeg(quality: 90)
+			# 	]
+			test:
 				files: [
 					expand: true     # これが無いとエラーになる, また、吐き出し側にも同名ファイルがある場合、これが無いとtaskが実行されない、という説も有り
 					cwd: '<%= path.src %>/img/common/'
@@ -156,16 +162,6 @@ module.exports = (grunt) ->
 
 	#-------------------------------------------------------------------------
 	# 各タスク
-	grunt.registerTask 'task_assemble', ['assemble']
-	grunt.registerTask 'task_compass', ['compass']
-
-	grunt.registerTask 'css', [
-		'csslint:dev'
-	]
-
-	grunt.registerTask 'html', [
-		'htmlhint:dev'
-	]
 
 	# dev
 	grunt.registerTask 'dev', [

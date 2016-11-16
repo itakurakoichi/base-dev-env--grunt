@@ -1,8 +1,11 @@
 {
-  "name": "base-dev-env--grunt",
-  "version": "0.1.0",
+  // "private": true,
+  "scripts": {
+    // "grunt": "./node_modules/.bin/grunt",
+    "postinstall": "bundle install --path vendor/bundle && cd ./node_modules/imagemin-mozjpeg && npm i mozjpeg@4.0.1"
+  },
   "devDependencies": {
-    
+
     "grunt": "^1.0.0",
     "grunt-contrib-compass": "^1.0.3",
     "grunt-contrib-connect": "^0.9.0",
@@ -15,6 +18,7 @@
 
     "assemble": "^0.4.42",
     "jit-grunt": "^0.9.0",
-    "time-grunt": "^1.0.0"
+    "time-grunt": "^1.0.0",
+    "imagemin-mozjpeg": "^5.1.0"
   }
 }
