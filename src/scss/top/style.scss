@@ -1,7 +1,14 @@
 @charset "utf-8";
 
 // Settings
+@import "../_reset";
 @import "../_variable";
+@import "../_base";
+
+// common
+@import "../common/_header";
+@import "../common/_footer";
+@import "../common/_section";
 
 // Page
 @import "_layout";

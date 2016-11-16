@@ -1,0 +1,14 @@
+//
+.l-footer {
+	margin-top: 100px;
+}
+.footer {
+	height: 200px;
+	padding: 20px;
+	background: $site_base_color;
+	box-sizing: border-box;
+	.footer-title {
+		color: #fff;
+		font-size: $font_size_xsmall;
+	}
+}

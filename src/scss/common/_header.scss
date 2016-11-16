@@ -1,0 +1,27 @@
+.l-header {
+}
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 80px;
+	background: $site_base_color;
+}
+
+.l-logoarea {
+	margin-left: 20px;
+}
+.logoarea {
+	.logoarea-title {
+		color: #fff;
+		letter-spacing: .2rem;
+		font-size: $font_size_small;
+	}
+}
+
+.l-globalnav {
+	margin-right: 20px;
+}
+.globalnav {
+	color: #fff;
+}
